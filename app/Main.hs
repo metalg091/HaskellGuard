@@ -1,9 +1,16 @@
 {-# LANGUAGE OverloadedStrings #-}
-import Network.Wai
-import Network.HTTP.Types (status200)
-import Network.Wai.Handler.Warp (run)
+import Web.Scotty
+import Data.Aeson(FromJSON, ToJSON)
+import GHC.Generics
 
-application _ respond = respond $
-  responseLBS status200 [("Content-Type", "text/plain")] "Hello World"
+main :: IO()
+main = do
+    scotty 3000 api
 
-main = run 3000 application
+api :: ScottyM()
+api = do
+    get "/api/test" $ genHelloWord
+
+genHelloWord :: ActionM()
+genHelloWord = do
+     text "Hello, World!"

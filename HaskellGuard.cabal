@@ -65,7 +65,11 @@ executable HaskellGuard
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.17.2.0, warp, wai, http-types
+    -- scotty => webserver,
+    -- aeson => JSON parsing
+    build-depends:    base ^>=4.17.2.0,
+                      scotty,
+                      aeson
 
     -- Directories containing source files.
     hs-source-dirs:   app
